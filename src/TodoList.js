@@ -1,9 +1,9 @@
 import React from 'react'
-
-export default function TodoList() {
+import Todo from './Todo'
+export default function TodoList( {todos, toggleTodo} ) {
     return (
-        <div>
-            To Do List
-        </div>
+todos.map(todo => {
+    return <Todo key={todo.name} todo={todo} />
+})
     )
 }
