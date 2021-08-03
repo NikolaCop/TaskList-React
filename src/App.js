@@ -3,16 +3,22 @@ import TodoList from'./TodoList';
 import uuidv4 from 'uuid';
 
 
-const LOCAL_STORAGE_KEY= 'todoApp.todos'
+const LOCAL_STORAGE_KEY = 'todoApp.todos'
 function App() {
   const [todos, setTodos] = useState([])
   const todoNameRef = useRef()
 
 
   const { 
-  v1: uuidv1,
   v4: uuidv4,
 } = require('uuid');
+
+//THIS MAKES IT DRAW TO THE PAGE ON REFRESH
+useEffect(() => {
+  const storedTodos = JSON.parse(localStorage.getItem
+  (LOCAL_STORAGE_KEY))
+  if (storedTodos) setTodos(storedTodos)
+}, [])
 
 
 //THIS IS SAVING TO LOCAL STORAGE, IN ORDER TO KEEP A CONSISTENT DISPLAY UPON REFRESH.
@@ -21,12 +27,7 @@ localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos))
 }, [todos] )
 
 
-//THIS MAKES IT DRAW TO THE PAGE ON REFRESH
-useEffect(() => {
-  const storedTodos = JSON.parse(localStorage.getItem
-  (LOCAL_STORAGE_KEY))
-  if (storedTodos) setTodos(storedTodos)
-}, [])
+
 
 //CHECKBOX
 function toggleTodo(id) {
